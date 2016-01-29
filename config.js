@@ -1,11 +1,11 @@
 module.exports = {
-  "debug_terminal_stdin": true,
   "log_level": "debug",
   "modules": {
-    "stdin": { // Debug stdin module
-
-    },
     "backends": {
+      "stdin": { // Debug stdin module
+        "enabled": true,
+        "identity": "arnaud" // Stdin isn't multiuser, so we need to simulate one
+      },
       "irc": {
         "enabled": false,
         "server": "localhost:6667",
