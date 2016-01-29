@@ -4,6 +4,9 @@ Made with love (and hate too, switch to discord already guys).
 
 Requires Node 5.x
 
+Oh, by the way: This project is licensed under GPLv3. More info in LICENSE.md
+Any file that doesn't have a license header is by default under GPLv3
+
 ## Features (at least planned ones)
  - Discord <> IRC Message bridge
  - Twitter queries
