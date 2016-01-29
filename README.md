@@ -44,5 +44,5 @@ And I don't like Gradle and maven! Kotlin is definitely on my list of stuff to t
 I wish I could have, but Swift isn't really mature on Linux yet.
 Also, there's no IRC/Discord lib for it, and writing that from scratch is out of scope for this project.
 
-### Why didn't you make this in C#
+### Why didn't you make this in C
 Just leave me alone already.
