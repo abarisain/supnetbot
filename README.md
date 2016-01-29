@@ -1,5 +1,5 @@
 # supnetbot
-A Discord/IRC bot for Supnetwork
+A Discord/IRC bot for Supnetwork. Énorme et sec.
 Made with love (and hate too, switch to discord already guys).
 
 Requires Node 5.x
