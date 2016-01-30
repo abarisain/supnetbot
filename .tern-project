@@ -1,7 +1,12 @@
 {
   "ecmaVersion": 6,
   "libs": [],
-  "loadEagerly": ["*.js","*/*.js","*/*/*.js","*/*/*/*.js"],
+  "loadEagerly": [
+    "*.js",
+    "*/*.js",
+    "*/*/*.js",
+    "*/*/*/*.js"
+  ],
   "plugins": {
     "complete_strings": {},
     "node": {},
