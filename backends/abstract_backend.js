@@ -28,6 +28,7 @@ class AbstractBackend {
   */
   get name() {
     throw new Error("'get name' not implemented or called the base implementation");
+    return "abstract"; // Unreachable, but linters don't like it since it should return a string.
   }
 
   /**
@@ -37,7 +38,6 @@ class AbstractBackend {
   send(message) {
     throw new Error("'send' not implemented or called the base implementation");
   }
-
 
   //endregion
 

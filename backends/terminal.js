@@ -8,9 +8,6 @@ const readline = require('readline');
  */
 class Terminal extends AbstractBackend {
 
-  var nickname;
-  var readlineInterface;
-
   constructor(options) {
     super(options);
 
@@ -18,6 +15,7 @@ class Terminal extends AbstractBackend {
       throw new Error("Terminal - Nickname wasn't configured");
     }
 
+    this.readlineInterface = null;
     this.nickname = options.nickname;
   }
 
@@ -37,7 +35,11 @@ class Terminal extends AbstractBackend {
     return "terminal";
   }
 
-  //endregion
+  send(message) {
+    console.log(message);
+  }
+
+//endregion
 
   bindEvents() {
     this.readlineInterface.on("line", (line) => {
