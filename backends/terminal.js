@@ -13,6 +13,11 @@ class Terminal extends AbstractBackend {
 
   constructor(options) {
     super(options);
+
+    if (options.nickname === undefined) {
+      throw new Error("Terminal - Nickname wasn't configured");
+    }
+
     this.nickname = options.nickname;
   }
 
@@ -35,7 +40,7 @@ class Terminal extends AbstractBackend {
   //endregion
 
   bindEvents() {
-    this.readlineInterface.on("line", function (line) {
+    this.readlineInterface.on("line", (line) => {
       this.emitMessageReceived(this.nickname, line);
     });
   }

@@ -10,7 +10,7 @@ class AbstractBackend {
 
   /**
   * Default constructor. This is the only one that the core will load.
-  * @param {object} options Raw object from config.js : config.modules.backends.<name>
+  * @param {object} options Raw object from config.js : config.backends.<name>
   */
   constructor(options) {
   }
@@ -31,6 +31,15 @@ class AbstractBackend {
   get name() {
     throw new Error("'get name' not implemented or called the base implementation");
   }
+
+  /**
+   * Send a message
+   * @param {string} message Message to send
+   */
+  send(message) {
+    throw new Error("'send' not implemented or called the base implementation");
+  }
+
 
   //endregion
 

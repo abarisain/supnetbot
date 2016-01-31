@@ -2,27 +2,27 @@
 
 module.exports = {
   "log_level": "debug",
-  "modules": {
-    "backends": {
-      "terminal": { // Debug terminal module
-        "enabled": true,
-        "nickname": "arnaud" // terminal isn't multiuser, so we need to simulate one
-      },
-      "irc": {
-        "enabled": false,
-        "server": "localhost:6667",
-        "password": null,
-        "channels": ["#supbottest"], //use channel:password if you need one
-        "nickname": "JeanYves"
-      },
-      "discord": {
-        "enabled": false,
-        "login": "",
-        "password": "",
-        "invite": "",
-        "channels": ["#general"] // All channels are joined on Discord, but pick which ones to listen to
-      }
+  "backends": {
+    "terminal": { // Debug terminal module
+      "enabled": true,
+      "nickname": "arnaud" // terminal isn't multiuser, so we need to simulate one
     },
+    "irc": {
+      "enabled": false,
+      "server": "localhost:6667",
+      "password": null,
+      "channels": ["#supbottest"], //use channel:password if you need one
+      "nickname": "JeanYves"
+    },
+    "discord": {
+      "enabled": false,
+      "login": "",
+      "password": "",
+      "invite": "",
+      "channels": ["#general"] // All channels are joined on Discord, but pick which ones to listen to
+    }
+  },
+  "plugins": {
     "logger": {
       "enabled": false,
       "excluded_backends": null
