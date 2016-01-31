@@ -1,10 +1,12 @@
+"use strict";
+
 module.exports = {
   "log_level": "debug",
   "modules": {
     "backends": {
-      "stdin": { // Debug stdin module
+      "terminal": { // Debug terminal module
         "enabled": true,
-        "identity": "arnaud" // Stdin isn't multiuser, so we need to simulate one
+        "nickname": "arnaud" // terminal isn't multiuser, so we need to simulate one
       },
       "irc": {
         "enabled": false,
