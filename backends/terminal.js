@@ -16,6 +16,10 @@ class Terminal extends AbstractBackend {
     }
 
     this.readlineInterface = null;
+
+    /**
+     * @type {string}
+     */
     this.nickname = options.nickname;
   }
 
