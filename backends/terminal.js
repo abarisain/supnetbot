@@ -1,5 +1,3 @@
-"use strict";
-
 const MessagesHandler = require('../messages_handler');
 const AbstractBackend = require('./abstract_backend');
 const readline = require('readline');
@@ -43,6 +41,7 @@ class Terminal extends AbstractBackend {
 
   bindEvents() {
     this.readlineInterface.on("line", (line) => {
+      //noinspection JSCheckFunctionSignatures
       MessagesHandler.messageReceived(this, this.nickname, line);
     });
   }

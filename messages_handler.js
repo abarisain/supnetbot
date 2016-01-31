@@ -1,5 +1,3 @@
-"use strict";
-
 const AbstractBackend = require('./backends/abstract_backend');
 const AbstractPlugin = require('./plugins/abstract_plugin');
 
@@ -48,14 +46,22 @@ class MessagesHandler {
   }
 
   /**
-   *
-   * @param backend
-   * @param nickname
-   * @param message
+   * Method to be called when a backend gets a message and wants to forward it to the other modules.
+   * It should split the nickname and message and send them as different arguments.
+   * @param {AbstractBackend} backend
+   * @param {string} nickname
+   * @param {string} message
    */
-  //TODO: Document this
   messageReceived(backend, nickname, message) {
-
+    if (backend === undefined || backend === null) {
+      throw new TypeError("MessagesHandler - messageReceived: backend must be a AbstractBackend instance");
+    }
+    if (nickname === nickname || nickname === null) {
+      throw new TypeError("MessagesHandler - messageReceived: nickname must be a string");
+    }
+    if (message === message || message === null) {
+      throw new TypeError("MessagesHandler - messageReceived: message must be a string");
+    }
   }
 }
 
