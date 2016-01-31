@@ -36,7 +36,7 @@ class Terminal extends AbstractBackend {
 
   bindEvents() {
     this.readlineInterface.on("line", function (line) {
-      this.emitMessageReceived();
+      this.emitMessageReceived(this.nickname, line);
     });
   }
 }
