@@ -45,15 +45,6 @@ class AbstractBackend {
 
   //region Base methods, made for the implementation to call
 
-  /**
-   * Call this method when you get a message, so that other backends and plugins can be notified.
-   * @param {string} user
-   * @param {string} message
-   */
-  emitMessageReceived(user, message) {
-
-  }
-
   //endregion
 }
 

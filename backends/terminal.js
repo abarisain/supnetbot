@@ -1,7 +1,9 @@
 "use strict";
 
+const MessagesHandler = require('../messages_handler');
 const AbstractBackend = require('./abstract_backend');
-var readline = require('readline');
+const readline = require('readline');
+
 /**
  * Terminal backend (powered by readline).
  * For debug purposes only: binds to stdin and stdout, so it will mix up with languages.
@@ -41,7 +43,7 @@ class Terminal extends AbstractBackend {
 
   bindEvents() {
     this.readlineInterface.on("line", (line) => {
-      this.emitMessageReceived(this.nickname, line);
+      MessagesHandler.messageReceived(this, this.nickname, line);
     });
   }
 }

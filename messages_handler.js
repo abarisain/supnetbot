@@ -46,6 +46,17 @@ class MessagesHandler {
       throw new Error("MessagesHandler - registerBackend: 'backend' must be a instance of AbstractBackend");
     }
   }
+
+  /**
+   *
+   * @param backend
+   * @param nickname
+   * @param message
+   */
+  //TODO: Document this
+  messageReceived(backend, nickname, message) {
+
+  }
 }
 
 module.exports = new MessagesHandler();
