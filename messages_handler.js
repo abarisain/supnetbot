@@ -65,8 +65,8 @@ class MessagesHandler {
 
     this.plugins.filter((plugin) => {
       return !plugin.isExcludedFromBackend(backendName);
-    }).forEach((item) => {
-      item.onMesssage(backend, nickname, message);
+    }).forEach((plugin) => {
+      plugin.onMesssage(backend, nickname, message);
     });
   }
 }
