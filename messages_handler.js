@@ -13,24 +13,22 @@ const AbstractPlugin = require('./plugins/abstract_plugin');
  */
 class MessagesHandler {
 
-  /**
-   * Backends registered to the handler.
-   * Note: Only register a enabled backend, since the handler won't check for that.
-   *
-   * @type {AbstractBackend[]}
-   */
-  const backends = [];
-
-  /**
-   * Backends registered to the handler.
-   * Note: Only register a enabled backend, since the handler won't check for that.
-   *
-   * @type {AbstractPlugin[]}
-   */
-  const plugins = [];
-
   constructor() {
+    /**
+     * Backends registered to the handler.
+     * Note: Only register a enabled backend, since the handler won't check for that.
+     *
+     * @type {AbstractBackend[]}
+     */
+    this.backends = [];
 
+    /**
+     * Backends registered to the handler.
+     * Note: Only register a enabled backend, since the handler won't check for that.
+     *
+     * @type {AbstractPlugin[]}
+     */
+    this.plugins = [];
   }
 
   /**
@@ -48,9 +46,9 @@ class MessagesHandler {
   /**
    * Method to be called when a backend gets a message and wants to forward it to the other modules.
    * It should split the nickname and message and send them as different arguments.
-   * @param {AbstractBackend} backend
-   * @param {string} nickname
-   * @param {string} message
+   * @param {AbstractBackend} backend Backend that got the message
+   * @param {string} nickname Who sent it
+   * @param {string} message The message itself
    */
   messageReceived(backend, nickname, message) {
     if (backend === undefined || backend === null) {
@@ -62,6 +60,14 @@ class MessagesHandler {
     if (message === message || message === null) {
       throw new TypeError("MessagesHandler - messageReceived: message must be a string");
     }
+
+    const backendName = backend.name;
+
+    this.plugins.filter((plugin) => {
+      return !plugin.isExcludedFromBackend(backendName);
+    }).forEach((item) => {
+      item.onMesssage(backend, nickname, message);
+    });
   }
 }
 

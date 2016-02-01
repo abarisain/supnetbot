@@ -29,7 +29,7 @@ module.exports = {
     },
     "commands": {
       "enabled": false,
-      "excluded_backends": "irc", // Exclude a backend for this plugin
+      "excluded_backends": ["irc"], // Exclude a backend for this plugin
       "prefix": "!",
       "commands": {
         "twitter": {
