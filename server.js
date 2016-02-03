@@ -19,7 +19,7 @@ const backends = {
 
 const enabledBackends = {};
 
-for (var backendName of Object.keys(backends)) {
+for (let backendName of Object.keys(backends)) {
   let backendConfig = config.backends[backendName];
   if (typeof backendConfig !== "object") {
     logger.error("Backend " + backendName + "isn't configured. Skipping.");
@@ -31,4 +31,9 @@ for (var backendName of Object.keys(backends)) {
     enabledBackends[backendName] = instance;
     messagesHandler.registerBackend(instance);
   }
+}
+
+logger.info("Connecting backends");
+for (let backend of Object.keys(enabledBackends)) {
+  enabledBackends[backend].connect();
 }
