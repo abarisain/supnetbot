@@ -24,6 +24,8 @@ class AbstractCommandPlugin {
      */
     this.allowedUsers = [];
 
+    //TODO: Add support for "<backend>:*"
+
     if (options.allowed_users instanceof Array) {
       for (let allowedUser of options.allowed_users) {
         if (typeof allowedUser !== "string") {
@@ -45,7 +47,7 @@ class AbstractCommandPlugin {
   isUserAllowed(backend, nickname) {
     // Transform our arguments to the "allowed_users" format
     let fullUser = (backend + ":" + nickname).toLowerCase();
-    
+
     for (let allowedUser of this.allowedUsers) {
       if ("*" === allowedUser || fullUser === allowedUser.toLowerCase()) {
         return true;
@@ -73,6 +75,16 @@ class AbstractCommandPlugin {
    */
   get alias() {
     throw new Error("AbstractCommandPlugin - 'get alias' not implemented or called the base implementation");
+  }
+
+  /**
+   * Called when a command has been detected and access control checked.
+   * You only need to execute the command and write back to the output.
+   * The "<prefix><command|alias>" part has been stripped. Only the argument string remains.
+   * @param {string} args The arguments string. Should be space-separated.
+   */
+  onCommand(args) {
+
   }
 
   // endregion
@@ -127,7 +139,7 @@ class Commands extends AbstractPlugin {
   }
 
   onMesssage(backend, nickname, message) {
-    //TODO : Implement
+    //TODO: Implement
   }
 }
 
