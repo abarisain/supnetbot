@@ -11,7 +11,7 @@ module.exports = {
       "enabled": false,
       "server": "localhost:6667",
       "password": null,
-      "channels": ["#supbottest"], //use channel:password if you need one
+      "channel": "#supbottest", //use channel:password if you need one
       "nickname": "JeanYves"
     },
     "discord": {
@@ -19,7 +19,7 @@ module.exports = {
       "login": "",
       "password": "",
       "invite": "",
-      "channels": ["#general"] // All channels are joined on Discord, but pick which ones to listen to
+      "channel": "#general" // All channels are joined on Discord, but pick which ones to listen to
     }
   },
   "plugins": {
@@ -31,7 +31,7 @@ module.exports = {
       "enabled": false,
       "excluded_backends": ["irc"], // Exclude a backend for this plugin
       "prefix": "!",
-      "commands": {
+      "plugins": {
         "twitter": {
           "enabled": true,
           "allowed_users": ["*"]

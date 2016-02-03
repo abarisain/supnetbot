@@ -62,7 +62,6 @@ class AbstractPlugin {
    */
   get name() {
     throw new Error("AbstractPlugin - 'get name' not implemented or called the base implementation");
-    return "abstract"; // Unreachable, but linters don't like it since it should return a string.
   }
 
   /**
