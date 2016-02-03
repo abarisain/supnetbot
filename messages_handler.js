@@ -1,3 +1,5 @@
+"use strict";
+
 const AbstractBackend = require('./backends/abstract_backend');
 const AbstractPlugin = require('./plugins/abstract_plugin');
 

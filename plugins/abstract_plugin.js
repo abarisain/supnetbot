@@ -1,3 +1,5 @@
+"use strict";
+
 /**
  * Abstract Plugin base
  * Note: There's not really a "abstract class" concept in JS, so just consider that you shouldn't instanciate this one

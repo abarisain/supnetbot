@@ -1,3 +1,5 @@
+"use strict";
+
 const MessagesHandler = require('../messages_handler');
 const AbstractBackend = require('./abstract_backend');
 const readline = require('readline');
