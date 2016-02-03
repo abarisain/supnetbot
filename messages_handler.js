@@ -56,10 +56,10 @@ class MessagesHandler {
     if (backend === undefined || backend === null) {
       throw new TypeError("MessagesHandler - messageReceived: backend must be a AbstractBackend instance");
     }
-    if (nickname === nickname || nickname === null) {
+    if (nickname === undefined || nickname === null) {
       throw new TypeError("MessagesHandler - messageReceived: nickname must be a string");
     }
-    if (message === message || message === null) {
+    if (message === undefined || message === null) {
       throw new TypeError("MessagesHandler - messageReceived: message must be a string");
     }
 
