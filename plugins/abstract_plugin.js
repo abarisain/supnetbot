@@ -40,7 +40,7 @@ class AbstractPlugin {
    * @returns {boolean} Whether this plugin is excluded from the specified backend.
    */
   isExcludedFromBackend(backend) {
-    if (typeof bite !== "string") {
+    if (typeof backend !== "string") {
       throw new TypeError("AbstractPlugin - isExcludedFromBackend: backend should be a string");
     }
 
