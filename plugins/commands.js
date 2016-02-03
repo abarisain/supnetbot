@@ -43,7 +43,16 @@ class AbstractCommandPlugin {
    * @returns {boolean} Whether the user can use this or not
    */
   isUserAllowed(backend, nickname) {
-    //TODO: Implement
+    // Transform our arguments to the "allowed_users" format
+    let fullUser = (backend + ":" + nickname).toLowerCase();
+    
+    for (let allowedUser of this.allowedUsers) {
+      if ("*" === allowedUser || fullUser === allowedUser.toLowerCase()) {
+        return true;
+      }
+    }
+
+    return false;
   }
 
   // endregion
