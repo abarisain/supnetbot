@@ -15,62 +15,62 @@ const AbstractPlugin = require('./plugins/abstract_plugin');
  */
 class MessagesHandler {
 
-  constructor() {
+    constructor() {
+        /**
+         * Backends registered to the handler.
+         * Note: Only register a enabled backend, since the handler won't check for that.
+         *
+         * @type {AbstractBackend[]}
+         */
+        this.backends = [];
+
+        /**
+         * Backends registered to the handler.
+         * Note: Only register a enabled backend, since the handler won't check for that.
+         *
+         * @type {AbstractPlugin[]}
+         */
+        this.plugins = [];
+    }
+
     /**
-     * Backends registered to the handler.
-     * Note: Only register a enabled backend, since the handler won't check for that.
+     * Register a backend on the message handler. It will start receiving
+     * Don't register a disabled backend!
      *
-     * @type {AbstractBackend[]}
+     * @param {AbstractBackend} backend
      */
-    this.backends = [];
+    registerBackend(backend) {
+        if (backend === undefined || backend === null) {
+            throw new Error("MessagesHandler - registerBackend: 'backend' must be a instance of AbstractBackend");
+        }
+    }
 
     /**
-     * Backends registered to the handler.
-     * Note: Only register a enabled backend, since the handler won't check for that.
-     *
-     * @type {AbstractPlugin[]}
+     * Method to be called when a backend gets a message and wants to forward it to the other modules.
+     * It should split the nickname and message and send them as different arguments.
+     * @param {AbstractBackend} backend Backend that got the message
+     * @param {string} nickname Who sent it
+     * @param {string} message The message itself
      */
-    this.plugins = [];
-  }
+    messageReceived(backend, nickname, message) {
+        if (backend === undefined || backend === null) {
+            throw new TypeError("MessagesHandler - messageReceived: backend must be a AbstractBackend instance");
+        }
+        if (nickname === undefined || nickname === null) {
+            throw new TypeError("MessagesHandler - messageReceived: nickname must be a string");
+        }
+        if (message === undefined || message === null) {
+            throw new TypeError("MessagesHandler - messageReceived: message must be a string");
+        }
 
-  /**
-   * Register a backend on the message handler. It will start receiving
-   * Don't register a disabled backend!
-   *
-   * @param {AbstractBackend} backend
-   */
-  registerBackend(backend) {
-    if (backend === undefined || backend === null) {
-      throw new Error("MessagesHandler - registerBackend: 'backend' must be a instance of AbstractBackend");
-    }
-  }
+        const backendName = backend.name;
 
-  /**
-   * Method to be called when a backend gets a message and wants to forward it to the other modules.
-   * It should split the nickname and message and send them as different arguments.
-   * @param {AbstractBackend} backend Backend that got the message
-   * @param {string} nickname Who sent it
-   * @param {string} message The message itself
-   */
-  messageReceived(backend, nickname, message) {
-    if (backend === undefined || backend === null) {
-      throw new TypeError("MessagesHandler - messageReceived: backend must be a AbstractBackend instance");
+        this.plugins.filter((plugin) => {
+            return !plugin.isExcludedFromBackend(backendName);
+        }).forEach((plugin) => {
+            plugin.onMesssage(backend, nickname, message);
+        });
     }
-    if (nickname === undefined || nickname === null) {
-      throw new TypeError("MessagesHandler - messageReceived: nickname must be a string");
-    }
-    if (message === undefined || message === null) {
-      throw new TypeError("MessagesHandler - messageReceived: message must be a string");
-    }
-
-    const backendName = backend.name;
-
-    this.plugins.filter((plugin) => {
-      return !plugin.isExcludedFromBackend(backendName);
-    }).forEach((plugin) => {
-      plugin.onMesssage(backend, nickname, message);
-    });
-  }
 }
 
 module.exports = new MessagesHandler();

@@ -10,49 +10,49 @@ const readline = require('readline');
  */
 class Terminal extends AbstractBackend {
 
-  constructor(options) {
-    super(options);
+    constructor(options) {
+        super(options);
 
-    if (options.nickname === undefined) {
-      throw new Error("Terminal - Nickname wasn't configured");
+        if (options.nickname === undefined) {
+            throw new Error("Terminal - Nickname wasn't configured");
+        }
+
+        this.readlineInterface = null;
+
+        /**
+         * @type {string}
+         */
+        this.nickname = options.nickname;
     }
 
-    this.readlineInterface = null;
+    //region Base methods
 
-    /**
-     * @type {string}
-     */
-    this.nickname = options.nickname;
-  }
+    connect() {
+        this.readlineInterface = readline.createInterface({
+            input: process.stdin,
+            output: process.stdout,
+            terminal: true
+        });
 
-  //region Base methods
+        this.bindEvents();
+    }
 
-  connect() {
-    this.readlineInterface = readline.createInterface({
-      input: process.stdin,
-      output: process.stdout,
-      terminal: true
-    });
+    get name() {
+        return "terminal";
+    }
 
-    this.bindEvents();
-  }
-
-  get name() {
-    return "terminal";
-  }
-
-  send(message) {
-    console.log(message);
-  }
+    send(message) {
+        console.log(message);
+    }
 
 //endregion
 
-  bindEvents() {
-    this.readlineInterface.on("line", (line) => {
-      //noinspection JSCheckFunctionSignatures
-      MessagesHandler.messageReceived(this, this.nickname, line);
-    });
-  }
+    bindEvents() {
+        this.readlineInterface.on("line", (line) => {
+            //noinspection JSCheckFunctionSignatures
+            MessagesHandler.messageReceived(this, this.nickname, line);
+        });
+    }
 }
 
 module.exports = Terminal;
