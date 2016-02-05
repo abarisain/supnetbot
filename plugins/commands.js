@@ -139,7 +139,17 @@ class Commands extends AbstractPlugin {
     }
 
     onMesssage(backend, nickname, message) {
-        //TODO: Implement
+        if (!message.startsWith(this.prefix)) {
+            return;
+        }
+
+        for (let plugin of this.loadedPlugins) {
+            // command prefix + command plugin alias
+            let pluginPrefix = this.prefix + plugin.alias;
+            if (message.startsWith(pluginPrefix) && plugin.isUserAllowed(backend.name, nickname)) {
+                plugin.onCommand(message.substring(pluginPrefix.length + 1));
+            }
+        }
     }
 }
 
