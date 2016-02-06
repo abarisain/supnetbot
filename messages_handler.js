@@ -25,8 +25,8 @@ class MessagesHandler {
         this.backends = [];
 
         /**
-         * Backends registered to the handler.
-         * Note: Only register a enabled backend, since the handler won't check for that.
+         * Plugins registered to the handler.
+         * Note: Only register a enabled plugin, since the handler won't check for that.
          *
          * @type {AbstractPlugin[]}
          */
@@ -34,7 +34,7 @@ class MessagesHandler {
     }
 
     /**
-     * Register a backend on the message handler. It will start receiving
+     * Register a backend on the message handler. It will start receiving messages from other backends and is expected to emit them.
      * Don't register a disabled backend!
      *
      * @param {AbstractBackend} backend
@@ -42,6 +42,18 @@ class MessagesHandler {
     registerBackend(backend) {
         if (backend === undefined || backend === null) {
             throw new Error("MessagesHandler - registerBackend: 'backend' must be a instance of AbstractBackend");
+        }
+    }
+
+    /**
+     * Register a plugin on the message handler. It will start receiving messages emitted by backends.
+     * Don't register a disabled plugin!
+     *
+     * @param {AbstractPlugin} plugin
+     */
+    registerPlugin(plugin) {
+        if (plugin === undefined || plugin === null) {
+            throw new Error("MessagesHandler - registerPlugin: 'plugin' must be a instance of AbstractPlugin");
         }
     }
 
