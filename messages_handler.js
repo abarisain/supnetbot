@@ -43,6 +43,8 @@ class MessagesHandler {
         if (backend === undefined || backend === null) {
             throw new Error("MessagesHandler - registerBackend: 'backend' must be a instance of AbstractBackend");
         }
+
+        this.backends.push(backend);
     }
 
     /**
@@ -55,6 +57,8 @@ class MessagesHandler {
         if (plugin === undefined || plugin === null) {
             throw new Error("MessagesHandler - registerPlugin: 'plugin' must be a instance of AbstractPlugin");
         }
+
+        this.plugins.push(plugin);
     }
 
     /**
