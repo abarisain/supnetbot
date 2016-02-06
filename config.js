@@ -17,10 +17,10 @@ module.exports = {
         },
         "discord": {
             "enabled": false,
-            "login": "",
-            "password": "",
-            "invite": "",
-            "channel": "#general" // All channels are joined on Discord, but pick which ones to listen to
+            "login": process.env["DISCORD_LOGIN"],
+            "password": process.env["DISCORD_PASSWORD"],
+            "invite": process.env["DISCORD_INVITE"],
+            "channel": process.env["DISCORD_CHANNEL"] // All channels are joined on Discord, but pick which ones to listen to
         }
     },
     "plugins": {
