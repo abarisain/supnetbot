@@ -37,8 +37,8 @@ module.exports = {
                     "enabled": true,
                     "allowed_users": ["*"],
                     "tweets_per_page": 3,
-                    "consumer_key": ["TWITTER_KEY"],
-                    "consumer_secret": ["TWITTER_SECRET"]
+                    "consumer_key": process.env["TWITTER_KEY"],
+                    "consumer_secret": process.env["TWITTER_SECRET"]
                 },
                 "admin": {
                     "enabled": true,
