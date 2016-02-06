@@ -55,7 +55,15 @@ class IRC extends AbstractBackend {
         });
 
         this.ircClient.addListener("message", (from, to, message) => {
-            console.log(from + ' => ' + to + ': ' + message);
+            // Ignore messages not from channels we want, so we avoid PRIVMSG spam
+            // Split on " ", which is the password separator for the IRC lib ("#channel password".split(" ")[0] = "#channel")
+
+            // Maybe it will reply to PMs in a future version, but that's complicated with the architecture
+            // I picked
+            if (this.channel.split(" ")[0].toLowerCase() === to.toLowerCase()) {
+                MessagesHandler.messageReceived(this, from, message);
+            }
+
         });
     }
 
