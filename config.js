@@ -28,7 +28,7 @@ module.exports = {
             "excluded_backends": null
         },
         "commands": {
-            "enabled": false,
+            "enabled": true,
             "excluded_backends": ["irc"], // Exclude a backend for this plugin
             "prefix": "!",
             "plugins": {
