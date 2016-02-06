@@ -85,7 +85,11 @@ class MessagesHandler {
         const backendName = backend.name;
 
         this.plugins.filter((plugin) => {
-            return !plugin.isExcludedFromBackend(backendName);
+            if (plugin.isExcludedFromBackend(backendName)) {
+                logger.debug("[MessagesHandler] - Plugin '" + plugin.name + "' is excluded for the backend '" + backendName + ". Not delivering.");
+                return false;
+            }
+            return true;
         }).forEach((plugin) => {
             plugin.onMesssage(backend, nickname, message);
         });

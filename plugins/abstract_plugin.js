@@ -46,7 +46,7 @@ class AbstractPlugin {
             throw new TypeError("AbstractPlugin - isExcludedFromBackend: backend should be a string");
         }
 
-        for (var excludedBackend in this.excludedBackends) {
+        for (var excludedBackend of this.excludedBackends) {
             if (backend === excludedBackend) {
                 return true;
             }
