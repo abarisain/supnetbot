@@ -52,7 +52,7 @@ class IRC extends AbstractBackend {
            logger.error("[IRC] Error: " + message);
         });
 
-        this.ircClient.addListener('message', function (from, to, message) {
+        this.ircClient.addListener("message", (from, to, message) => {
             console.log(from + ' => ' + to + ': ' + message);
         });
     }
