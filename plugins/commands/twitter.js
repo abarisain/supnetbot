@@ -30,9 +30,20 @@ class Twitter extends AbstractCommandPlugin {
     onCommand(args) {
         logger.debug("Twitter: Getting statuses for " + args);
         this.twit.get("statuses/user_timeline", { "screen_name": args }, function(err, data, response) {
-            console.log("err: " + err);
-            console.log("data: " + data);
-            console.log("reponse: " + response);
+            if (err !== undefined) {
+                MessagesHandler.sendMessage(null, "[Twitter] Error while getting tweets for " + args);
+                logger.debug("[Twitter] Error while getting tweets for " + args + "\n" + err);
+                return;
+            }
+
+            MessagesHandler.sendMessage(null, "[Twitter] Last Tweets from @" + args);
+            for (let i = 0; i < 3; i++) {
+                if (data[i] === undefined) {
+                    continue;
+                }
+
+                MessagesHandler.sendMessage(null, (i+1) + ": " + data[i].text.replace("\n", " "));
+            }
         });
     }
 }
