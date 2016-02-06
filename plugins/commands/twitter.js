@@ -45,7 +45,7 @@ class Twitter extends AbstractCommandPlugin {
         let argsArray = args.split(" ") || [];
 
         let username = argsArray[0];
-        let page = parseInt(argsArray[1]);
+        let page = parseInt(argsArray[1] || 0);
 
         if (argsArray.length == 0 || "" === username || isNaN(page)) {
             MessagesHandler.sendMessage(null, "[Twitter] Usage: <nickname> [page (number)]");
