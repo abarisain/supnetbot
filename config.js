@@ -16,7 +16,7 @@ module.exports = {
             "debug": false
         },
         "discord": {
-            "enabled": false,
+            "enabled": true,
             "login": process.env["DISCORD_LOGIN"],
             "password": process.env["DISCORD_PASSWORD"],
             "channel": process.env["DISCORD_CHANNEL"] // All channels are joined on Discord, but pick which ones to listen to
