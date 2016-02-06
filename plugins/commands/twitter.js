@@ -4,6 +4,7 @@ const AbstractCommandPlugin = require('./abstract_command_plugin');
 const MessagesHandler = require('../../messages_handler');
 const logger = require('winston');
 
+const HTMLEntities = require('html-entities').AllHtmlEntities;
 const Twit = require('twit');
 
 /**
@@ -15,7 +16,9 @@ class Twitter extends AbstractCommandPlugin {
     constructor(options) {
         super(options);
 
-        this.tweetsPerPage = options.tweets_per_page;
+        this.htmlEntities = new HTMLEntities();
+
+        this.tweetsPerPage = options.tweets_per_page || 3;
 
         if (options.consumer_key === undefined) {
             throw new Error("[Twitter] - Consumer key wasn't configured");
@@ -66,7 +69,9 @@ class Twitter extends AbstractCommandPlugin {
                     continue;
                 }
 
-                MessagesHandler.sendMessage(null, (i+1) + ": " + data[i].text.replace("\n", " "));
+                let htmlDecodedText = this.htmlEntities.decode(data[i].text || "");
+
+                MessagesHandler.sendMessage(null, (i+1) + ": " + htmlDecodedText.replace("\n", " "));
             }
         });
     }
