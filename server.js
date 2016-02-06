@@ -34,7 +34,8 @@ for (let pluginName of Object.keys(plugins)) {
 }
 
 const backends = {
-    "terminal": require('./backends/terminal')
+    "terminal": require('./backends/terminal'),
+    "irc": require('./backends/irc')
 };
 
 const enabledBackends = {};

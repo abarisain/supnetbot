@@ -61,3 +61,5 @@ class IRC extends AbstractBackend {
         this.ircClient.say(this.channel, message);
     }
 }
+
+modules.exports = IRC;
