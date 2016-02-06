@@ -16,7 +16,13 @@ Any file that doesn't have a license header is by default under GPLv3
 ## How to install
  - Configure everything in config.js (pretty self explanatory)
  - npm install
- - node ./index.js
+ - node ./server.js
+
+Once config.js is configured, you can also use docker:
+ - docker build -t supnetbot .
+ - docker run --rm supnetbot
+
+If you use the logger plugin, you should use a volume for the output dir
 
 ## Roadmap
  - Get a new name
