@@ -2,6 +2,7 @@
 
 const AbstractBackend = require('./backends/abstract_backend');
 const AbstractPlugin = require('./plugins/abstract_plugin');
+const logger = require('winston');
 
 /**
  * Class responsible for bridging messages between backends and plugins.
@@ -78,6 +79,8 @@ class MessagesHandler {
         if (message === undefined || message === null) {
             throw new TypeError("MessagesHandler - messageReceived: message must be a string");
         }
+
+        logger.debug("[MessagesHandler] - [" + backend + "] <" + nickname + "> " + message);
 
         const backendName = backend.name;
 
