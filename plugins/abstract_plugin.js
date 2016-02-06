@@ -19,7 +19,7 @@ class AbstractPlugin {
          */
         this._excludedBackends = options.excluded_backends || [];
 
-        if (options.excluded_ackends instanceof Array) {
+        if (options.excluded_backends instanceof Array) {
             this._excludedBackends = options.excluded_backends;
         } else {
             throw new TypeError("AbstractPlugin (" + this.name + ") - constructor: excluded_backends should be null or a string array");
