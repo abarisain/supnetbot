@@ -30,7 +30,7 @@ module.exports = {
         },
         "commands": {
             "enabled": true,
-            "excluded_backends": ["irc"], // Exclude a backend for this plugin
+            "excluded_backends": [], // Exclude a backend for this plugin. Ex: ["irc"]
             "prefix": "!",
             "plugins": {
                 "twitter": {
