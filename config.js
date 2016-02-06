@@ -8,7 +8,7 @@ module.exports = {
             "nickname": "arnaud" // terminal isn't multiuser, so we need to simulate one
         },
         "irc": {
-            "enabled": false,
+            "enabled": true,
             "server": process.env["IRC_SERVER"],
             "password": null,
             "channel": process.env["IRC_CHANNEL"], //use "channel password" if you need one
