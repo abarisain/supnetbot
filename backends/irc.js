@@ -25,8 +25,6 @@ class IRC extends AbstractBackend {
             throw new Error("[IRC] - Nickname wasn't configured");
         }
 
-        this.ircClient = null;
-
         /**
          * @type {string}
          */
