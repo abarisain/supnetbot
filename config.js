@@ -11,7 +11,7 @@ module.exports = {
             "enabled": false,
             "server": "localhost:6667",
             "password": null,
-            "channel": "#supbottest", //use channel:password if you need one
+            "channel": "#supbottest", //use "channel password" if you need one
             "nickname": "JeanYves"
         },
         "discord": {
