@@ -56,9 +56,11 @@ class Commands extends AbstractPlugin {
             return;
         }
 
+        logger.debug("Commands - Got a message: " + message);
+
         for (let plugin of this.loadedPlugins) {
-            // command prefix + command plugin alias
-            let pluginPrefix = this.prefix + plugin.alias;
+            // command prefix + command plugin alias + empty space (separator)
+            let pluginPrefix = this.prefix + plugin.alias + " ";
             if (message.startsWith(pluginPrefix) && plugin.isUserAllowed(backend.name, nickname)) {
                 plugin.onCommand(message.substring(pluginPrefix.length + 1));
             }
