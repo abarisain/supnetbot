@@ -43,7 +43,7 @@ class Twitter extends AbstractCommandPlugin {
         return "t";
     }
 
-    onCommand(args) {
+    onCommand(backend, args) {
         args = args || "";
         let argsArray = args.split(" ") || [];
 
@@ -58,12 +58,12 @@ class Twitter extends AbstractCommandPlugin {
         logger.debug("Twitter: Getting statuses for " + username);
         this.twit.get("statuses/user_timeline", { "screen_name": username }, (err, data) => {
             if (err !== undefined) {
-                MessagesHandler.sendMessage(null, "[Twitter] Error while getting tweets for " + username);
+                MessagesHandler.sendMessage(backend.name, "[Twitter] Error while getting tweets for " + username);
                 logger.debug("[Twitter] Error while getting tweets for " + username + "\n" + err);
                 return;
             }
 
-            MessagesHandler.sendMessage(null, "[Twitter] Last Tweets from @" + username);
+            MessagesHandler.sendMessage(backend.name, "[Twitter] Last Tweets from @" + username);
             for (let i = (page * this.tweetsPerPage); i < (this.tweetsPerPage + (page * this.tweetsPerPage)); i++) {
                 if (data[i] === undefined) {
                     continue;
@@ -71,7 +71,7 @@ class Twitter extends AbstractCommandPlugin {
 
                 let htmlDecodedText = this.htmlEntities.decode(data[i].text || "");
 
-                MessagesHandler.sendMessage(null, (i+1) + ": " + htmlDecodedText.replace("\n", " "));
+                MessagesHandler.sendMessage(backend.name, (i+1) + ": " + htmlDecodedText.replace("\n", " "));
             }
         });
     }

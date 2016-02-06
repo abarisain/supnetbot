@@ -78,9 +78,10 @@ class AbstractCommandPlugin {
      * Called when a command has been detected and access control checked.
      * You only need to execute the command and write back to the output.
      * The "<prefix><command|alias>" part has been stripped. Only the argument string remains.
+     * @param {AbstractBackend} backend Backed the command is originating from.
      * @param {string} args The arguments string. Should be space-separated.
      */
-    onCommand(args) {
+    onCommand(backend, args) {
         throw new Error("AbstractCommandPlugin - 'onCommand' not implemented or called the base implementation");
     }
 
