@@ -34,7 +34,8 @@ module.exports = {
             "plugins": {
                 "twitter": {
                     "enabled": true,
-                    "allowed_users": ["*"]
+                    "allowed_users": ["*"],
+                    "tweets_per_page": 3
                 },
                 "admin": {
                     "enabled": true,

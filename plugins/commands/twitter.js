@@ -6,10 +6,16 @@ const logger = require('winston');
 
 const Twit = require('twit');
 
+/**
+ * Twitter command plugin
+ * Gets the tweets for a specified nickname. Second argument controls pagination.
+ */
 class Twitter extends AbstractCommandPlugin {
 
     constructor(options) {
         super(options);
+
+        this.tweetsPerPage = options.tweets_per_page;
 
         //TODO: Make this in config.js but ignore it for dev
         this.twit = new Twit({
@@ -28,16 +34,27 @@ class Twitter extends AbstractCommandPlugin {
     }
 
     onCommand(args) {
-        logger.debug("Twitter: Getting statuses for " + args);
-        this.twit.get("statuses/user_timeline", { "screen_name": args }, function(err, data, response) {
+        args = args || "";
+        let argsArray = args.split(" ") || [];
+
+        let username = argsArray[0];
+        let page = parseInt(argsArray[1]);
+
+        if (argsArray.length == 0 || "" === username || isNaN(page)) {
+            MessagesHandler.sendMessage(null, "[Twitter] Usage: <nickname> [page (number)]");
+            return;
+        }
+
+        logger.debug("Twitter: Getting statuses for " + username);
+        this.twit.get("statuses/user_timeline", { "screen_name": username }, (err, data) => {
             if (err !== undefined) {
-                MessagesHandler.sendMessage(null, "[Twitter] Error while getting tweets for " + args);
-                logger.debug("[Twitter] Error while getting tweets for " + args + "\n" + err);
+                MessagesHandler.sendMessage(null, "[Twitter] Error while getting tweets for " + username);
+                logger.debug("[Twitter] Error while getting tweets for " + username + "\n" + err);
                 return;
             }
 
-            MessagesHandler.sendMessage(null, "[Twitter] Last Tweets from @" + args);
-            for (let i = 0; i < 3; i++) {
+            MessagesHandler.sendMessage(null, "[Twitter] Last Tweets from @" + username);
+            for (let i = (page * this.tweetsPerPage); i < (this.tweetsPerPage + (page * this.tweetsPerPage)); i++) {
                 if (data[i] === undefined) {
                     continue;
                 }
