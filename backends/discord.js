@@ -15,6 +15,18 @@ class Discord extends AbstractBackend {
     constructor(options) {
         super(options);
 
+        /**
+         * Enqueued messages
+         * @type {string[]}
+         */
+        this.messageQueue = [];
+
+        /**
+         * Is discord sending our messages? If true, enqueue, else, send directly
+         * @type {boolean}
+         */
+        this.sending = false;
+
         if (options.login === undefined) {
             throw new Error("[Discord] - Login wasn't configured");
         }
@@ -26,6 +38,7 @@ class Discord extends AbstractBackend {
         if (options.channel === undefined) {
             throw new Error("[Discord] - Channel wasn't configured");
         }
+
         /**
          * @type {string}
          */
@@ -53,8 +66,9 @@ class Discord extends AbstractBackend {
         });
 
         this.discordClient.on("message", (message) => {
-            console.log(Object.keys(message));
-            console.log(message.content);
+            if (this.channel === message.channel.id) {
+                MessagesHandler.messageReceived(this, message.author.username, message.content)
+            }
         });
     }
 
@@ -67,7 +81,34 @@ class Discord extends AbstractBackend {
     }
 
     send(message) {
-        // TOOO: Implement this
+        this.messageQueue.push(message);
+
+        if (!this.sending) {
+            // Start the queue processing if needed;
+            this.processNextMessage();
+        }
+    }
+
+    processNextMessage() {
+        // Send the next message in the queue
+        if (this.messageQueue.length > 0) {
+            this.writeMessage(this.messageQueue.shift());
+        } else {
+            // The queue is empty, we're not sending
+            this.sending = false;
+        }
+    }
+
+    writeMessage(message) {
+        this.sending = true;
+        this.discordClient.sendMessage(this.channel, message, (err, message) => {
+            if (err !== undefined) {
+                //TODO: See if message is undefined and retry if we can
+                logger.error("[Discord] - Unable to send message. Error: " + err + " - Message: " + message);
+            }
+
+            this.processNextMessage();
+        });
     }
 }
 

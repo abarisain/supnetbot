@@ -19,7 +19,12 @@ module.exports = {
             "enabled": true,
             "login": process.env["DISCORD_LOGIN"],
             "password": process.env["DISCORD_PASSWORD"],
-            "channel": process.env["DISCORD_CHANNEL"] // All channels are joined on Discord, but pick which ones to listen to
+            // All channels are joined on Discord, but pick which one to listen to.
+            // Channels are unique between servers.
+            // You can find the channel name in the url when in a browser:
+            // https://discordapp.com/channels/<serverid>/<channel>
+            // The second id is the one you need to set here. Only numbers
+            "channel": process.env["DISCORD_CHANNEL"]
         }
     },
     "plugins": {
