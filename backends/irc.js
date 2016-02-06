@@ -60,9 +60,7 @@ class IRC extends AbstractBackend {
     }
 
     connect() {
-        this.ircClient.connect(5, (err, err2) => {
-           console.log(err, err2);
-        });
+        this.ircClient.connect(5);
     }
 
     get name() {
