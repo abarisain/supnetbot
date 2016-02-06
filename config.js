@@ -9,10 +9,10 @@ module.exports = {
         },
         "irc": {
             "enabled": false,
-            "server": "localhost:6667",
+            "server": process.env["IRC_SERVER"],
             "password": null,
-            "channel": "#supbottest", //use "channel password" if you need one
-            "nickname": "JeanYves"
+            "channel": process.env["IRC_CHANNEL"], //use "channel password" if you need one
+            "nickname": process.env["IRC_NICKNAME"]
         },
         "discord": {
             "enabled": false,
@@ -35,7 +35,9 @@ module.exports = {
                 "twitter": {
                     "enabled": true,
                     "allowed_users": ["*"],
-                    "tweets_per_page": 3
+                    "tweets_per_page": 3,
+                    "consumer_key": ["TWITTER_KEY"],
+                    "consumer_secret": ["TWITTER_SECRET"]
                 },
                 "admin": {
                     "enabled": true,

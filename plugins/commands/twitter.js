@@ -17,10 +17,17 @@ class Twitter extends AbstractCommandPlugin {
 
         this.tweetsPerPage = options.tweets_per_page;
 
-        //TODO: Make this in config.js but ignore it for dev
+        if (options.consumer_key === undefined) {
+            throw new Error("[Twitter] - Consumer key wasn't configured");
+        }
+
+        if (options.consumer_secret === undefined) {
+            throw new Error("[Twitter] - Consumer secret wasn't configured");
+        }
+
         this.twit = new Twit({
-            "consumer_key": process.env["TWITTER_KEY"],
-            "consumer_secret": process.env["TWITTER_SECRET"],
+            "consumer_key": options.consumer_key,
+            "consumer_secret": options.consumer_secret,
             "app_only_auth": true
         });
     }
