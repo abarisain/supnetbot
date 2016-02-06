@@ -4,3 +4,4 @@ node_modules/
 supnetbot.iml
 npm-debug.log
 npm.log
+start.sh
