@@ -20,9 +20,9 @@ const plugins = {
 const enabledPlugins = {};
 
 for (let pluginName of Object.keys(plugins)) {
-    let pluginConfig = config.backends[pluginName];
+    let pluginConfig = config.plugins[pluginName];
     if (typeof pluginConfig !== "object") {
-        logger.error("Plugin " + pluginName + "isn't configured. Skipping.");
+        logger.error("Plugin " + pluginName + " isn't configured. Skipping.");
         continue;
     }
     if (pluginConfig.enabled === true) {
@@ -42,7 +42,7 @@ const enabledBackends = {};
 for (let backendName of Object.keys(backends)) {
     let backendConfig = config.backends[backendName];
     if (typeof backendConfig !== "object") {
-        logger.error("Backend " + backendName + "isn't configured. Skipping.");
+        logger.error("Backend " + backendName + " isn't configured. Skipping.");
         continue;
     }
     if (backendConfig.enabled === true) {
