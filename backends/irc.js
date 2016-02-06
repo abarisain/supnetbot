@@ -76,7 +76,7 @@ class IRC extends AbstractBackend {
     }
 
     send(message) {
-        this.ircClient.say(this.channel, message);
+        this.ircClient.say(this.channel.split(" ")[0], message);
     }
 }
 
