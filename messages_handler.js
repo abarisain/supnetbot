@@ -71,6 +71,21 @@ class MessagesHandler {
             plugin.onMesssage(backend, nickname, message);
         });
     }
+
+    /**
+     * Send a message to all backends, except for excluded ones.
+     * @param {string[]?} excludedBackends Name of the backends that shouldn't send this
+     * @param {string} message Message to send
+     */
+    sendMessage(excludedBackends, message) {
+        let _excludedBackends = excludedBackends || [];
+
+        for (let backend of this.backends) {
+            if (_excludedBackends.indexOf(backend.name) == -1) {
+                backend.send(message);
+            }
+        }
+    }
 }
 
 module.exports = new MessagesHandler();
