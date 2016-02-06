@@ -4,7 +4,7 @@ const logger = require('winston');
 const AbstractPlugin = require('./abstract_plugin');
 
 const plugins = {
-    //"twitter": require('')
+    "twitter": require('./commands/twitter')
 };
 
 class Commands extends AbstractPlugin {
