@@ -62,7 +62,7 @@ class Commands extends AbstractPlugin {
             // command prefix + command plugin alias + empty space (separator)
             let pluginPrefix = this.prefix + plugin.alias + " ";
             if (message.startsWith(pluginPrefix) && plugin.isUserAllowed(backend.name, nickname)) {
-                plugin.onCommand(message.substring(pluginPrefix.length + 1));
+                plugin.onCommand(message.substring(pluginPrefix.length));
             }
         }
     }
