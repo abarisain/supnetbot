@@ -62,4 +62,4 @@ class IRC extends AbstractBackend {
     }
 }
 
-modules.exports = IRC;
+module.exports = IRC;
