@@ -7,4 +7,4 @@ WORKDIR /data/supnetbot
 RUN npm install -g forever &&\
     npm install
 
-CMD npm start
+CMD forever node ./server.js
