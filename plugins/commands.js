@@ -34,14 +34,14 @@ class Commands extends AbstractPlugin {
         this.loadedPlugins = [];
 
         for (let plugin of Object.keys(plugins)) {
-            let pluginOptions = options.commands.plugins[plugin];
+            let pluginOptions = options.plugins[plugin];
             if (typeof pluginOptions !== "object") {
                 logger.error("Commands - Plugin " + plugin.name + "'s options are missing. Skipping.");
                 continue;
             }
 
             if (pluginOptions.enabled === true) {
-                logger.info("Commands - Loading plugin: " + plugin.name);
+                logger.info("Commands - Loading plugin: " + plugin);
                 this.loadedPlugins.push(new plugins[plugin](pluginOptions));
             }
         }

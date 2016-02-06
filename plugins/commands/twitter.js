@@ -1,18 +1,21 @@
 "use strict";
 
 const AbstractCommandPlugin = require('./abstract_command_plugin');
+const MessagesHandler = require('../../messages_handler');
 
 class Twitter extends AbstractCommandPlugin {
 
-    get name():string {
-        return super.name;
+    get name() {
+        return "twitter";
     }
 
-    get alias():string {
-        return super.alias;
+    get alias() {
+        return "t";
     }
 
-    onCommand(args:string) {
-        return super.onCommand(args);
+    onCommand(args) {
+        MessagesHandler.sendMessage(null, "it works " + args);
     }
 }
+
+module.exports = Twitter;
