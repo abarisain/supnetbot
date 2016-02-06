@@ -41,19 +41,27 @@ class IRC extends AbstractBackend {
          * @type {string}
          */
         this.nickname = options.nickname;
-    }
 
-    connect() {
         this.ircClient = new IRCClient.Client(this.server, this.nickname, {
+            "autoConnect": false,
+            "userName": this.nickname,
+            "realName": this.nickname + " a friendly hackable bot",
+            "debug": options.debug || false,
             "channels": [this.channel]
         });
 
         this.ircClient.addListener("error", (message) => {
-           logger.error("[IRC] Error: " + message);
+            logger.error("[IRC] Error: " + message);
         });
 
         this.ircClient.addListener("message", (from, to, message) => {
             console.log(from + ' => ' + to + ': ' + message);
+        });
+    }
+
+    connect() {
+        this.ircClient.connect(5, (err, err2) => {
+           console.log(err, err2);
         });
     }
 

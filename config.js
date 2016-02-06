@@ -12,7 +12,8 @@ module.exports = {
             "server": process.env["IRC_SERVER"],
             "password": null,
             "channel": process.env["IRC_CHANNEL"], //use "channel password" if you need one
-            "nickname": process.env["IRC_NICKNAME"]
+            "nickname": process.env["IRC_NICKNAME"],
+            "debug": false
         },
         "discord": {
             "enabled": false,
