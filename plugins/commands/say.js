@@ -35,7 +35,7 @@ class Say extends AbstractCommandPlugin {
         let message = this.words[args.toLowerCase()];
 
         if (message === undefined || message === null) {
-            MessagesHandler.sendMessage(backend.name, "I don't know what you mean by '" + message + "'.");
+            MessagesHandler.sendMessage(backend.name, "I don't know what you mean by '" + args + "'.");
             return;
         }
 

@@ -58,7 +58,7 @@ module.exports = {
                         "woop": "PUTAIN J'EN AI RAS LE CUL DES ARBITRES DANS FIFA",
                         "octal": "mange moi",
                         "sim": "tg",
-                        "Julie": "y'a plus de coca"
+                        "julie": "y'a plus de coca"
                     }
                 }
             }
