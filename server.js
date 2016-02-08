@@ -14,7 +14,8 @@ logger.info("Starting supnetbot ´･ω･｀(what a shitty name)");
 //TODO: Maybe get this out of server.js
 
 const plugins = {
-    "commands": require('./plugins/commands')
+    "commands": require('./plugins/commands'),
+    "bridge": require('./plugins/bridge')
 };
 
 const enabledPlugins = {};
