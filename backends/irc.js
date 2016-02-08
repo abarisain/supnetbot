@@ -77,7 +77,11 @@ class IRC extends AbstractBackend {
     }
 
     send(message) {
-        this.ircClient.say(this.channel.split(" ")[0], message);
+        try {
+            this.ircClient.say(this.channel.split(" ")[0], message);
+        } catch (e) {
+            logger.error("[IRC] - Error while sending message. Backend is probably disconnected.");
+        }
     }
 }
 
