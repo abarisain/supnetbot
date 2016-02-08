@@ -1,6 +1,5 @@
 "use strict";
 
-const logger = require('winston');
 const AbstractPlugin = require('./abstract_plugin');
 const MessagesHandler = require('../messages_handler');
 /**
@@ -13,7 +12,7 @@ class Bridge extends AbstractPlugin {
     }
 
     get name() {
-        return "commands";
+        return "bridge";
     }
 
     onMesssage(backend, nickname, message) {
