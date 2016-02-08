@@ -109,7 +109,7 @@ class Discord extends AbstractBackend {
     writeMessage(message) {
         this.sending = true;
         this.discordClient.sendMessage(this.channel, message, (err, message) => {
-            if (err !== undefined || err !== null) {
+            if (err !== undefined && err !== null) {
                 //TODO: See if message is undefined and retry if we can
                 logger.error("[Discord] - Unable to send message. Error: " + err + " - Message: " + message);
             }
