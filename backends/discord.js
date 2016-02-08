@@ -66,7 +66,7 @@ class Discord extends AbstractBackend {
         });
 
         this.discordClient.on("message", (message) => {
-            if (this.channel === message.channel.id) {
+            if (this.channel === message.channel.id && this.discordClient.user.id !== message.author.id) {
                 // Parse image messages
                 if (message.attachments.length > 0) {
                     for (let attachment of message.attachments) {

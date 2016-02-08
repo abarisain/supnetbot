@@ -53,6 +53,9 @@ class IRC extends AbstractBackend {
         });
 
         this.ircClient.addListener("message", (from, to, message) => {
+            if (from === this.nickname) {
+                return;
+            }
             // Ignore messages not from channels we want, so we avoid PRIVMSG spam
             // Split on " ", which is the password separator for the IRC lib ("#channel password".split(" ")[0] = "#channel")
 
