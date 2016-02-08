@@ -15,7 +15,8 @@ logger.info("Starting supnetbot ´･ω･｀(what a shitty name)");
 
 const plugins = {
     "commands": require('./plugins/commands'),
-    "bridge": require('./plugins/bridge')
+    "bridge": require('./plugins/bridge'),
+    "logger": require('./plugins/logger')
 };
 
 const enabledPlugins = {};
