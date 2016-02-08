@@ -1,9 +1,9 @@
 FROM node
 
-COPY . /data/supnetbot
+COPY . /opt/supnetbot
 
-WORKDIR /data/supnetbot
+WORKDIR /opt/supnetbot
 
 RUN npm install
 
-CMD node /data/supnetbot/server.js
+CMD node /opt/supnetbot/server.js
