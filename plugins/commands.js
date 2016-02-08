@@ -14,11 +14,11 @@ class Commands extends AbstractPlugin {
         super(options);
 
         if (typeof options.prefix !== "string") {
-            throw new Error("Commands - Prefix wasn't configured");
+            throw new Error("[Commands] - Prefix wasn't configured");
         }
 
         if (typeof options.plugins !== "object") {
-            throw new Error("Commands - Plugins were not configured");
+            throw new Error("[Commands] - Plugins were not configured");
         }
 
         /**
@@ -37,12 +37,12 @@ class Commands extends AbstractPlugin {
         for (let plugin of Object.keys(plugins)) {
             let pluginOptions = options.plugins[plugin];
             if (typeof pluginOptions !== "object") {
-                logger.error("Commands - Plugin " + plugin.name + "'s options are missing. Skipping.");
+                logger.error("[Commands] - Plugin " + plugin.name + "'s options are missing. Skipping.");
                 continue;
             }
 
             if (pluginOptions.enabled === true) {
-                logger.info("Commands - Loading plugin: " + plugin);
+                logger.info("[Commands] - Loading plugin: " + plugin);
                 this.loadedPlugins.push(new plugins[plugin](pluginOptions));
             }
         }
@@ -57,7 +57,7 @@ class Commands extends AbstractPlugin {
             return;
         }
 
-        logger.debug("Commands - Got a message: " + message);
+        logger.debug("[Commands] - Got a message: " + message);
 
         for (let plugin of this.loadedPlugins) {
             // command prefix + command plugin alias + empty space (separator)

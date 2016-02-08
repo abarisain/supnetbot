@@ -80,7 +80,7 @@ class MessagesHandler {
             throw new TypeError("MessagesHandler - messageReceived: message must be a string");
         }
 
-        logger.debug("[MessagesHandler] - [" + backend + "] <" + nickname + "> " + message);
+        logger.debug("[MessagesHandler] - [" + backend.name + "] <" + nickname + "> " + message);
 
         const backendName = backend.name;
 
