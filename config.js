@@ -51,7 +51,7 @@ module.exports = {
             }
         },
         "bridge": { // Bridge messages from other protocols (stdin, Discord, IRC) between eachother
-            "enabled": false,
+            "enabled": true,
             "excluded_backends": null
         }
     }

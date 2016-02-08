@@ -110,7 +110,7 @@ class MessagesHandler {
             _backends = [];
         }
 
-        logger.debug("Sending to backend [" + backends +"]: " + message);
+        logger.debug("Sending to backend " + backends +": " + message);
 
         for (let backend of this.backends) {
             for (let allowedBackend of _backends) {
@@ -123,17 +123,24 @@ class MessagesHandler {
 
     /**
      * Send a message to all backends, except for excluded ones.
-     * @param {string[]?} excludedBackends Name of the backends that shouldn't send this
+     * @param {string|string[]?} excludedBackends Name of the backends that shouldn't send this
      * @param {string} message Message to send
      */
     sendMessageExcluding(excludedBackends, message) {
-        let _excludedBackends = excludedBackends || [];
+        let _excludedBackends = null;
+        if (typeof excludedBackends === "string") {
+            _excludedBackends = [excludedBackends];
+        } else if (excludedBackends instanceof Array) {
+            _excludedBackends = excludedBackends;
+        } else {
+            _excludedBackends = [];
+        }
 
-        logger.debug("Sending to all backends except [" + backends +"]: " + message);
+        logger.debug("Sending to all backends except " + excludedBackends +": " + message);
 
         for (let backend of this.backends) {
             for (let excludedBackend of _excludedBackends) {
-                if (_excludedBackends === backend.name) {
+                if (excludedBackend === backend.name) {
                     continue;
                 }
                 backend.send(message);
