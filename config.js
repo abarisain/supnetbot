@@ -47,6 +47,18 @@ module.exports = {
                 "admin": {
                     "enabled": true,
                     "allowed_users": ["irc:Dream_Team", "discord:Aranom"]
+                },
+                "say": {
+                    "enabled": true,
+                    "allowed_users": ["*"],
+                    "words": {
+                        "tableflip": "(╯°□°）╯︵ ┻━┻",
+                        "rick": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+                        "woop": "PUTAIN J'EN AI RAS LE CUL DES ARBITRES DANS FIFA",
+                        "octal": "mange moi",
+                        "sim": "tg",
+                        "Julie": "y'a plus de coca"
+                    }
                 }
             }
         },
