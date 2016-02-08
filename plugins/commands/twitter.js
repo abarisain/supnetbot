@@ -48,10 +48,12 @@ class Twitter extends AbstractCommandPlugin {
         let argsArray = args.split(" ") || [];
 
         let username = argsArray[0];
-        let page = parseInt(argsArray[1] || 0);
+        let page = Math.max(parseInt(argsArray[1] || 0), 0);
+
+        let getURL = argsArray[2] === "url";
 
         if (argsArray.length == 0 || "" === username || isNaN(page)) {
-            MessagesHandler.sendMessage(null, "[Twitter] Usage: <nickname> [page (number)]");
+            MessagesHandler.sendMessage(null, "[Twitter] Usage: <nickname> [page (number)]\n or: <nickname> <tweet number> url");
             return;
         }
 
@@ -63,19 +65,31 @@ class Twitter extends AbstractCommandPlugin {
                 return;
             }
 
-            let output = "[Twitter] Last Tweets from @" + username;
+            if (getURL) {
+                let tweetIndex = page - 1;
 
-            for (let i = (page * this.tweetsPerPage); i < (this.tweetsPerPage + (page * this.tweetsPerPage)); i++) {
-                if (data[i] === undefined) {
-                    continue;
+                if (data[tweetIndex] === undefined) {
+                    MessagesHandler.sendMessage(backend.name, "[Twitter] Error while getting tweet " + page + " for " + username);
+                    return;
                 }
 
-                let htmlDecodedText = this.htmlEntities.decode(data[i].text || "");
+                // No need to resolve the real username, twitter will redirect if it's a RT
+                MessagesHandler.sendMessage(backend.name, "https://twitter.com/" + username + "/status/" + data[tweetIndex].id_str);
+            } else {
+                let output = "[Twitter] Last Tweets from @" + username;
 
-                output = output + "\n" + (i+1) + ": " + htmlDecodedText.replace(/\n/g, " ");
+                for (let i = (page * this.tweetsPerPage); i < (this.tweetsPerPage + (page * this.tweetsPerPage)); i++) {
+                    if (data[i] === undefined) {
+                        continue;
+                    }
+
+                    let htmlDecodedText = this.htmlEntities.decode(data[i].text || "");
+
+                    output = output + "\n" + (i+1) + ": " + htmlDecodedText.replace(/\n/g, " ");
+                }
+
+                MessagesHandler.sendMessage(backend.name, output);
             }
-
-            MessagesHandler.sendMessage(backend.name, output);
         });
     }
 }
