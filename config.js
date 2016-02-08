@@ -30,7 +30,8 @@ module.exports = {
     "plugins": {
         "logger": {
             "enabled": true,
-            "excluded_backends": ["irc", "terminal"]
+            "excluded_backends": ["terminal"],
+            "output_dir": process.env["LOGGER_DIR"]
         },
         "commands": {
             "enabled": true,
