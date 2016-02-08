@@ -63,7 +63,8 @@ class Twitter extends AbstractCommandPlugin {
                 return;
             }
 
-            MessagesHandler.sendMessage(backend.name, "[Twitter] Last Tweets from @" + username);
+            let output = "[Twitter] Last Tweets from @" + username;
+
             for (let i = (page * this.tweetsPerPage); i < (this.tweetsPerPage + (page * this.tweetsPerPage)); i++) {
                 if (data[i] === undefined) {
                     continue;
@@ -71,8 +72,10 @@ class Twitter extends AbstractCommandPlugin {
 
                 let htmlDecodedText = this.htmlEntities.decode(data[i].text || "");
 
-                MessagesHandler.sendMessage(backend.name, (i+1) + ": " + htmlDecodedText.replace(/\n/g, " "));
+                output = output + "\n" + (i+1) + ": " + htmlDecodedText.replace(/\n/g, " ");
             }
+
+            MessagesHandler.sendMessage(backend.name, output);
         });
     }
 }
