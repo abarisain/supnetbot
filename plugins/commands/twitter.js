@@ -53,7 +53,7 @@ class Twitter extends AbstractCommandPlugin {
         let getURL = argsArray[2] === "url";
 
         if (argsArray.length == 0 || "" === username || isNaN(page)) {
-            MessagesHandler.sendMessage(null, "[Twitter] Usage: <nickname> [page (number)]\n or: <nickname> <tweet number> url");
+            MessagesHandler.sendMessage(backend.name, "[Twitter] Usage: <nickname> [page (number)]\n or: <nickname> <tweet number> url");
             return;
         }
 
