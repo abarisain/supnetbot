@@ -6,6 +6,13 @@ const logger = require('winston');
 const DiscordAPI = require('discord.js');
 
 /**
+ * Regexp for parsing channel deeplinks in messages.
+ * Yes, discord kills everything that looks like that, even if it's in the middle of a word. >_>
+ * @type {RegExp}
+ */
+const DISCORD_CHANNEL_REGEXP = /<#[0-9]+>/g
+
+/**
  * Discord Backend
  * Note: Only supports accounts with one server for now.
  * Only listens to one channel too.
@@ -73,7 +80,25 @@ class Discord extends AbstractBackend {
                         MessagesHandler.messageReceived(this, message.author.username, message.author.username + " has uploaded a file (" + attachment.filename + "): " + attachment.url);
                     }
                 } else {
-                    MessagesHandler.messageReceived(this, message.author.username, message.content)
+                    let cleanMessage = message.cleanContent;
+                    // Try to resolve channels, not yet hanlded by the lib
+                    let linkedChannels = cleanMessage.match(DISCORD_CHANNEL_REGEXP);
+                    if (linkedChannels != null && linkedChannels.length > 0) {
+                        let channels = this.discordClient.channels;
+
+                        // Very little chance that it is empty, but we must make sure
+                        if (channels instanceof Array && channels.length > 0) {
+                            for (let rawChannel of cleanMessage.match(DISCORD_CHANNEL_REGEXP)) {
+                                for (let channel of channels) {
+                                    if (rawChannel.substring(2, rawChannel.length - 1) == channel.id) {
+                                        cleanMessage = cleanMessage.replace(rawChannel, "#" + channel.name);
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    MessagesHandler.messageReceived(this, message.author.username, cleanMessage);
                 }
             }
         });
