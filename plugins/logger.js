@@ -4,12 +4,14 @@ const fs = require('fs');
 const path = require('path');
 
 const logger = require('winston');
+const moment = require('moment');
 
 const AbstractPlugin = require('./abstract_plugin');
 const MessagesHandler = require('../messages_handler');
 
 /**
  * Plugin that logs messages from backends to the configured directory.
+ * Logs in the same format as eggdrops : [HH:mm] <nickname> message
  */
 class Logger extends AbstractPlugin {
 
@@ -65,7 +67,7 @@ class Logger extends AbstractPlugin {
         try {
             // TODO: Check if this isn't a performance disaster
             // TODO: irssi format
-            fs.appendFileSync(fileDescriptor, message + "\n");
+            fs.appendFileSync(fileDescriptor, "[" + moment().format("H:m") + "] <" + nickname.replace(/ /g, "") + "> " + message + "\n");
         } catch (e) {
             logger.error("[Logger] - Error while appending to log for backend '" + backend.name + '": ' + e);
         }
