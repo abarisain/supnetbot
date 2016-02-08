@@ -71,7 +71,7 @@ class Twitter extends AbstractCommandPlugin {
 
                 let htmlDecodedText = this.htmlEntities.decode(data[i].text || "");
 
-                MessagesHandler.sendMessage(backend.name, (i+1) + ": " + htmlDecodedText.replace("\n", " "));
+                MessagesHandler.sendMessage(backend.name, (i+1) + ": " + htmlDecodedText.replace(/\n/g, " "));
             }
         });
     }
