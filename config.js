@@ -29,8 +29,8 @@ module.exports = {
     },
     "plugins": {
         "logger": {
-            "enabled": false,
-            "excluded_backends": null
+            "enabled": true,
+            "excluded_backends": ["irc", "terminal"]
         },
         "commands": {
             "enabled": true,
