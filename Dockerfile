@@ -4,7 +4,6 @@ COPY . /data/supnetbot
 
 WORKDIR /data/supnetbot
 
-RUN npm install -g forever &&\
-    npm install
+RUN npm install
 
-CMD forever node ./server.js
+CMD node /data/supnetbot/server.js
