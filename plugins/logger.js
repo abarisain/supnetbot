@@ -67,7 +67,7 @@ class Logger extends AbstractPlugin {
         try {
             // TODO: Check if this isn't a performance disaster
             // TODO: irssi format
-            fs.appendFileSync(fileDescriptor, "[" + moment().format("H:m") + "] <" + nickname.replace(/ /g, "") + "> " + message + "\n");
+            fs.appendFileSync(fileDescriptor, "[" + moment().format("H:mm") + "] <" + nickname.replace(/ /g, "") + "> " + message + "\n");
         } catch (e) {
             logger.error("[Logger] - Error while appending to log for backend '" + backend.name + '": ' + e);
         }
