@@ -69,7 +69,7 @@ class Discord extends AbstractBackend {
 
         this.discordClient.on("disconnected", () => {
             logger.info("[Discord] Disconnected");
-            //TODO : Reconnect (or die?).
+            this.connect();
         });
 
         this.discordClient.on("message", (message) => {

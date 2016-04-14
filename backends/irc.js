@@ -45,7 +45,8 @@ class IRC extends AbstractBackend {
             "userName": this.nickname,
             "realName": this.nickname + " a friendly hackable bot",
             "debug": options.debug || false,
-            "channels": [this.channel]
+            "channels": [this.channel],
+            "retryCount": 2000000
         });
 
         this.ircClient.addListener("error", (message) => {
