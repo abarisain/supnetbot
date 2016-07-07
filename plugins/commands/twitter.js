@@ -53,44 +53,60 @@ class Twitter extends AbstractCommandPlugin {
         let getURL = argsArray[2] === "url";
 
         if (argsArray.length == 0 || "" === username || isNaN(page)) {
-            MessagesHandler.sendMessage(backend.name, "[Twitter] Usage: <nickname> [page (number)]\n or: <nickname> <tweet number> url");
+            MessagesHandler.sendMessageExcluding([], "[Twitter] Usage: <nickname> [page (number)]\n or: <nickname> <tweet number> url\n or: <tweet url>");
             return;
         }
 
-        logger.debug("Twitter: Getting statuses for " + username);
-        this.twit.get("statuses/user_timeline", { "screen_name": username }, (err, data) => {
-            if (err !== undefined) {
-                MessagesHandler.sendMessage(backend.name, "[Twitter] Error while getting tweets for " + username);
-                logger.debug("[Twitter] Error while getting tweets for " + username + "\n" + err);
-                return;
-            }
+        // The variable is called username, but it can be an URL.
+        // Check if the string starts with "https://twitter.com" (with www. and http variants)
+        let urlMatches = username.match(/^https?:\/\/(www\.)?twitter\.com\/.*\/status\/([0-9]*).*$/i);
+        if (urlMatches != null && urlMatches.length == 3) {
+            this.twit.get("statuses/show/"+urlMatches[2], {}, (err, data) => {
+                if (err !== undefined) {
+                    MessagesHandler.sendMessageExcluding([], "[Twitter] Error while getting tweet for URL " + username);
+                    logger.debug("[Twitter] Error while getting tweets for URL " + username + "\n" + err);
+                    return;
+                }
+            });
+        } else {
+            logger.debug("Twitter: Getting statuses for " + username);
+            this.twit.get("statuses/user_timeline", { "screen_name": username }, (err, data) => {
+                if (err !== undefined) {
+                    MessagesHandler.sendMessageExcluding([], "[Twitter] Error while getting tweets for " + username);
+                    logger.debug("[Twitter] Error while getting tweets for " + username + "\n" + err);
 
-            if (getURL) {
-                let tweetIndex = page - 1;
+                    MessagesHandler.sendMessageExcluding([], data["user"]["screen_name"] + " - " + data["text"]);
 
-                if (data[tweetIndex] === undefined) {
-                    MessagesHandler.sendMessage(backend.name, "[Twitter] Error while getting tweet " + page + " for " + username);
                     return;
                 }
 
-                // No need to resolve the real username, twitter will redirect if it's a RT
-                MessagesHandler.sendMessage(backend.name, "https://twitter.com/" + username + "/status/" + data[tweetIndex].id_str);
-            } else {
-                let output = "[Twitter] Last Tweets from @" + username;
+                if (getURL) {
+                    let tweetIndex = page - 1;
 
-                for (let i = (page * this.tweetsPerPage); i < (this.tweetsPerPage + (page * this.tweetsPerPage)); i++) {
-                    if (data[i] === undefined) {
-                        continue;
+                    if (data[tweetIndex] === undefined) {
+                        MessagesHandler.sendMessageExcluding([], "[Twitter] Error while getting tweet " + page + " for " + username);
+                        return;
                     }
 
-                    let htmlDecodedText = this.htmlEntities.decode(data[i].text || "");
+                    // No need to resolve the real username, twitter will redirect if it's a RT
+                    MessagesHandler.sendMessageExcluding([], "https://twitter.com/" + username + "/status/" + data[tweetIndex].id_str);
+                } else {
+                    let output = "[Twitter] Last Tweets from @" + username;
 
-                    output = output + "\n" + (i+1) + ": " + htmlDecodedText.replace(/\n/g, " ");
+                    for (let i = (page * this.tweetsPerPage); i < (this.tweetsPerPage + (page * this.tweetsPerPage)); i++) {
+                        if (data[i] === undefined) {
+                            continue;
+                        }
+
+                        let htmlDecodedText = this.htmlEntities.decode(data[i].text || "");
+
+                        output = output + "\n" + (i+1) + ": " + htmlDecodedText.replace(/\n/g, " ");
+                    }
+
+                    MessagesHandler.sendMessageExcluding([], output);
                 }
-
-                MessagesHandler.sendMessage(backend.name, output);
-            }
-        });
+            });   
+        }
     }
 }
 
