@@ -68,6 +68,8 @@ class Twitter extends AbstractCommandPlugin {
                     logger.debug("[Twitter] Error while getting tweets for URL " + username + "\n" + err);
                     return;
                 }
+
+                MessagesHandler.sendMessageExcluding([], data["user"]["screen_name"] + " - " + data["text"]);
             });
         } else {
             logger.debug("Twitter: Getting statuses for " + username);
@@ -75,9 +77,6 @@ class Twitter extends AbstractCommandPlugin {
                 if (err !== undefined) {
                     MessagesHandler.sendMessageExcluding([], "[Twitter] Error while getting tweets for " + username);
                     logger.debug("[Twitter] Error while getting tweets for " + username + "\n" + err);
-
-                    MessagesHandler.sendMessageExcluding([], data["user"]["screen_name"] + " - " + data["text"]);
-
                     return;
                 }
 
