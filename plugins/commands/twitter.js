@@ -61,6 +61,7 @@ class Twitter extends AbstractCommandPlugin {
         // Check if the string starts with "https://twitter.com" (with www. and http variants)
         let urlMatches = username.match(/^https?:\/\/(www\.)?twitter\.com\/.*\/status\/([0-9]*).*$/i);
         if (urlMatches != null && urlMatches.length == 3) {
+            logger.debug("Twitter: Getting tweet for URL " + urlMatches[2]);
             this.twit.get("statuses/show/"+urlMatches[2], {}, (err, data) => {
                 if (err !== undefined) {
                     MessagesHandler.sendMessageExcluding([], "[Twitter] Error while getting tweet for URL " + username);
