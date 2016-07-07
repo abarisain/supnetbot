@@ -69,7 +69,7 @@ class Twitter extends AbstractCommandPlugin {
                     return;
                 }
 
-                MessagesHandler.sendMessageExcluding([], data["user"]["screen_name"] + " - " + data["text"]);
+                MessagesHandler.sendMessageExcluding([], "@" + data["user"]["screen_name"] + " - " + data["text"]);
             });
         } else {
             logger.debug("Twitter: Getting statuses for " + username);
