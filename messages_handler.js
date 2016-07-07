@@ -139,12 +139,13 @@ class MessagesHandler {
         logger.debug("Sending to all backends except " + excludedBackends +": " + message);
 
         for (let backend of this.backends) {
+            outer:
             for (let excludedBackend of _excludedBackends) {
                 if (excludedBackend === backend.name) {
-                    continue;
+                    continue outer;
                 }
-                backend.send(message);
             }
+            backend.send(message);
         }
     }
 }
