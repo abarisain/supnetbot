@@ -51,7 +51,9 @@ module.exports = {
             "irc:Julie",
             "irc:Rick",
             "irc:Dream_Team",
-            "discord:Aranom"
+            "discord:Aranom",
+            "discord:Julie",
+            "discord:Rick"
           ]
         },
         say: {
