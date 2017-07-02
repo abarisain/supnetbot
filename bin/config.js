@@ -47,7 +47,12 @@ module.exports = {
         },
         admin: {
           enabled: true,
-          allowed_users: ["irc:Dream_Team", "discord:Aranom"]
+          allowed_users: [
+            "irc:Julie",
+            "irc:Rick",
+            "irc:Dream_Team",
+            "discord:Aranom"
+          ]
         },
         say: {
           enabled: true,
