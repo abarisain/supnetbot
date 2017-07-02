@@ -6,4 +6,4 @@ WORKDIR /opt/supnetbot
 
 RUN npm install
 
-CMD node /opt/supnetbot/server.js
+CMD node /opt/supnetbot/bin/supnetbot.js
