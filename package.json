@@ -4,7 +4,8 @@
   "description": "Supnetwork Discord/IRC bot",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node --harmony bin/supnetbot.js"
   },
   "author": "Arnaud Barisain-Monrose",
   "license": "GPL-3.0",

@@ -1,4 +1,3 @@
-#!/bin/bash
-":" //# http://sambal.org/?p=1014; exec /usr/bin/env node --harmony "$0" "$@"
+#!/usr/bin/env node
 
 require("../lib/server").start(require("./config"));
