@@ -68,7 +68,7 @@ module.exports = {
             julie: "y'a plus de coca"
           }
         },
-        gdax: {
+        coinbase: {
           enabled: true,
           allowed_users: ["*"]
         }
