@@ -67,6 +67,10 @@ module.exports = {
             sim: "tg",
             julie: "y'a plus de coca"
           }
+        },
+        gdax: {
+          enabled: true,
+          allowed_users: ["*"]
         }
       }
     },
