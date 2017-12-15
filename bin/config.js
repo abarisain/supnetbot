@@ -71,6 +71,10 @@ module.exports = {
         coinbase: {
           enabled: true,
           allowed_users: ["*"]
+        },
+        coinmarketcap: {
+          enabled: true,
+          allowed_users: ["*"]
         }
       }
     },
